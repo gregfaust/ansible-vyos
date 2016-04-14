@@ -1,1 +1,15 @@
 ---
+galaxy_info:
+  author: gregfaust
+  description: Ansible role to deploy configurations for VyOS network devices
+  company: gregfaust
+  license: GPL
+  min_ansible_version: 1.9
+  platforms:
+  - name: VyOS
+    versions:
+    - all
+  categories:
+  - networking
+  - vyos
+dependencies: []
