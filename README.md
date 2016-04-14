@@ -3,13 +3,13 @@ ansible-vyos
 
 Installs VyOS configuration.
 
-Tested on VyOS 1.1.0, patches are welcome.
+Tested on VyOS 1.1.7, patches are welcome.
 
 ## Installation
 
 Clone this repo to your Ansible roles directory
 
-    git clone git://github.com/ahaitoute/ansible-vyos.git vyos
+    git clone git://github.com/gregfaust/ansible-vyos.git vyos
 
 ## Usage
 
@@ -17,14 +17,16 @@ Here's an example how to use this role.
 
     ---
     - hosts: servers
-      sudo: yes
+      become: root
       roles:
         - { role: vyos,
-            vyos_configuration: "vyos_configurations/vyos_configuration_{{ ansible_hostname }}.j2",
-            sudo: no
+            vyos_configuration: "vyos_configurations/vyos_configuration_{{ ansible_hostname }}.j2"
           }
+      tasks:
+        - name: install OpenVPN Key
+          copy: src="vyos_configurations/{{ ansible_hostname }}.key" dest="/config/auth/{{ ansible_hostname }}.key" owner=root group=vyattacfg mode=0775
 
-The user must have VyOS-level admin.
+The user must have root permissions in order to copy keys and set permissions.
 
 ## License
 
